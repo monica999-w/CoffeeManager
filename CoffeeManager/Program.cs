@@ -1,18 +1,31 @@
 ﻿using CoffeeManager;
+using CoffeeManager.Coffees;
+using CoffeeManager.Interfaces;
+using CoffeeManager.Milk;
 
 class Program
 {
     static void Main(string[] args)
     {
-        CoffeeRecipeManager recipeManager = new CoffeeRecipeManager();
-        //recipeManager.DisplayRecipes();
+        CoffeeMaker coffeeMaker = new CoffeeMaker();
 
-        recipeManager.AddCustemerRecipe("Regular Milk", "Espresso + Soy milk + Sugar");
-        recipeManager.AddCustemerRecipe("Oat Milk", "Cappuccino + Sugar+ Sugar");
-        recipeManager.AddCustemerRecipe("Soy Milk", "Flat white + Sugar");
+        Cappuccino cappuccino = new Cappuccino();
+        Espresso espresso = new Espresso(); 
+        FlatWhite flatWhite = new FlatWhite();
 
-        recipeManager.AddCustemerRecipe("Regular Milk", "Cappuccino + Sugar+ Sugar");
+        coffeeMaker.AddMoreSugar(espresso, 4);
+        coffeeMaker.MakeCoffee(espresso);
+        Console.WriteLine(coffeeMaker.OrderInfo(espresso));
 
-        recipeManager.DisplayRecipes();
+        SoyMilk soyMilk = new SoyMilk();
+        coffeeMaker.AddMoreMilk(flatWhite, soyMilk);
+        coffeeMaker.AddMoreSugar(flatWhite, 4);
+        coffeeMaker.MakeCoffee(flatWhite);
+        Console.WriteLine(coffeeMaker.OrderInfo(flatWhite));
+
+        RegularMilk regularMilk = new RegularMilk();
+        coffeeMaker.AddMoreMilk(cappuccino, regularMilk);
+        coffeeMaker.MakeCoffee(cappuccino);
+        Console.WriteLine(coffeeMaker.OrderInfo(cappuccino));
     }
 }
