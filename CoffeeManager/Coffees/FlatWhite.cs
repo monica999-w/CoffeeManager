@@ -1,22 +1,16 @@
-﻿using CoffeeManager.Interfaces;
-using CoffeeManager.Milk;
-using System;
-using System.Collections.Generic;
+﻿
+
+using CoffeeManager.Ingrediants;
+using CoffeeManager.Interfaces;
 
 namespace CoffeeManager.Coffees
 {
-    public class FlatWhite: ICoffee
+    public class FlatWhiteCreator : CoffeeCreator
     {
-        public FlatWhite()
+        public override ICoffee CreateCoffee()
         {
-            BlackCoffee = 1;
-            Sugar = 0;
-            Milk = [new RegularMilk()];
+            return AddIngredient(new BlackCoffee(), new Milk(2));
         }
-
-        public int BlackCoffee { get; set; }
-        public int Sugar { get; set; }
-        public List<IMilk> Milk { get; set; }
     }
 }
 

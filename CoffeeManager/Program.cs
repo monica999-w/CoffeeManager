@@ -1,31 +1,29 @@
-﻿using CoffeeManager;
+﻿using CoffeeManager.Ingrediants;
+using CoffeeManager;
 using CoffeeManager.Coffees;
 using CoffeeManager.Interfaces;
-using CoffeeManager.Milk;
 
 class Program
 {
     static void Main(string[] args)
+
     {
-        CoffeeMaker coffeeMaker = new CoffeeMaker();
+        CoffeeCreator espressoCreator = new EspressoCreator();
+        ICoffee espresso = espressoCreator.CreateCoffee();
+        var customEspresso = espressoCreator.AddIngredient(espresso, new Milk(1));
+        Console.WriteLine("Custom Espresso: " + customEspresso.GetName());
 
-        Cappuccino cappuccino = new Cappuccino();
-        Espresso espresso = new Espresso(); 
-        FlatWhite flatWhite = new FlatWhite();
+        // Creating a cappuccino with two sugars
+        CoffeeCreator cappuccinoCreator = new CappuccinoCreator();
+        ICoffee cappuccino = cappuccinoCreator.CreateCoffee();
+        var customCappuccino = cappuccinoCreator.AddIngredient(cappuccino, new Sugar(2));
+        Console.WriteLine("Custom Cappuccino: " + customCappuccino.GetName());
 
-        coffeeMaker.AddMoreSugar(espresso, 4);
-        coffeeMaker.MakeCoffee(espresso);
-        Console.WriteLine(coffeeMaker.OrderInfo(espresso));
-
-        SoyMilk soyMilk = new SoyMilk();
-        coffeeMaker.AddMoreMilk(flatWhite, soyMilk);
-        coffeeMaker.AddMoreSugar(flatWhite, 4);
-        coffeeMaker.MakeCoffee(flatWhite);
-        Console.WriteLine(coffeeMaker.OrderInfo(flatWhite));
-
-        RegularMilk regularMilk = new RegularMilk();
-        coffeeMaker.AddMoreMilk(cappuccino, regularMilk);
-        coffeeMaker.MakeCoffee(cappuccino);
-        Console.WriteLine(coffeeMaker.OrderInfo(cappuccino));
+        // Creating a flat white with brown sugar
+        CoffeeCreator flatWhiteCreator = new FlatWhiteCreator();
+        ICoffee flatWhite = flatWhiteCreator.CreateCoffee();
+        var customFlatWhite = flatWhiteCreator.AddIngredient(flatWhite, new Sugar(1));
+        Console.WriteLine("Custom Flat White: " + customFlatWhite.GetName());
     }
 }
+

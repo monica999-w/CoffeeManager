@@ -1,21 +1,12 @@
 ﻿using CoffeeManager.Interfaces;
-using CoffeeManager.Milk;
-
 
 namespace CoffeeManager.Coffees
 {
-    public class Espresso : ICoffee
+    public class EspressoCreator : CoffeeCreator
     {
-
-        public Espresso()  
+        public override ICoffee CreateCoffee()
         {
-            BlackCoffee = 1;
-            Sugar = 0;
-            Milk = [new OatMilk()];
+            return new BlackCoffee();
         }
-
-        public int BlackCoffee { get; set; }
-        public int Sugar { get; set; }
-        public List<IMilk> Milk { get; set; }
     }
 }
